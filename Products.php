@@ -14,15 +14,18 @@ class Products extends db{
 
     $r['cols'] = '*';
     $r['table_name'] = $this->table_name;
-    if(count($obj) > 1){
+
+    if($obj[1]){
       $r['params'] = 'WHERE catalogue_id=:catalogue_id';
+      $r['array'] = [
+        ':catalogue_id' => $obj[1]
+      ];
     } else {
       $r['params'] = '';
+      $r['array'] = [];
     }
 
-    $r['array'] = [
-      ':catalogue_id' => $obj[1]
-    ];
+    
 
     $images = $this->Read($r);
 

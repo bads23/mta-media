@@ -23,7 +23,10 @@ Class Images {
       $upload = move_uploaded_file($msg,$path);
       
       if($upload){
-        return $path;
+
+        $response = $this->save_to_django($path, $data);
+        return $response;
+
       } else {
         return false;
       }
@@ -31,6 +34,22 @@ Class Images {
     } else {
       return $is_valid;
     }
+  }
+
+  public function save_to_django($path, $data){
+
+    $post = [
+      'catalog' => $data['catalogue_id'],
+      'path' => $path,
+      'is_avatar' => False
+    ];
+
+    $ch = curl_init('https://b23.pythonanywhere.com/images/');
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, $post);
+
+    $response = curl_exec($ch)
+    return $response
   }
 
   public function validate($data, $files){
