@@ -15,22 +15,31 @@ $images = new Images();
 $Getter = new Getter();
 $products = new Products();
 $posts = new Posts();
+$email = new Sender();
 
-if($method === 'POST'){
-  $data = $_POST;
+if($method === 'POST'){ 
+  $data = json_decode(file_get_contents('php://input'));
   $files = $_FILES;
 
-  $path = $images->uploader($data, $files);
+  if(isset($data->category)){
+    
+    $path = $images->uploader($data, $files);
 
-  if(!$path){
-    echo 'Unable To upload Image!';
-  } else {
-    $data['path'] = $path;
-    if($data['category'] === 'products'){
-      echo $products->insert($data);
-    } else if($data['category'] === 'posts'){
-      echo $posts->insert($data);
+    if(!$path){
+      echo 'Unable To upload Image!';
+    } else {
+      $data->path = $path;
+      if($data->category === 'products'){
+        echo $products->insert($data);
+      } else if($data->category === 'posts'){
+        echo $posts->insert($data);
+      }
     }
+  } else if(isset($data->email)) {
+    echo $email->make_admin_email($data->order);
+
+  } else {
+    echo print_r(file_get_contents("php://input"));
   }
 
 } else if($method === 'GET') {

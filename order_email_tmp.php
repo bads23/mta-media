@@ -8,9 +8,9 @@
 </head>
 <body style="width: 100%; margin: 0; padding: 0;background-color: #fff;">
 
-    <table style="width: 600px; margin: 0 auto; background-color: #fffdd0; border: 1px solid #d4af37;">
+    <table style="width: 600px; margin: 50px auto 0px auto;  border: 1px solid #d4af37;">
         <tbody>
-            <tr>
+            <tr style="background-color: #fffdd0;">
                 <th style="border-bottom: 1px solid #d4af37; padding: 20px 0px">
                     <img src="http://store.motiontalentafrica.co.ke/static/media/MTA.0336bcf8.svg" alt="">
                 </th>
@@ -24,44 +24,62 @@
                     <h2 style="text-align: center">Order Confirmed!</h2>
 
                     <p>
-                        Dear Steve,
+                        Dear <?php echo $this->order->user_email; ?>,
                     </p>
 
-                    <p>Your order <b>(1-RFVKSK-161019)</b> on the Motion Talent Africa Store has been confirmed! Thanks for shopping with us. Below are the details of your order.</p>
+                    <p>Your order <b>(1-RFVKSK-161019)</b> on the Motion Talent Africa Store has been confirmed! Below are the details of your order. <br><br> Thank you for shopping with us.</p>
                 </td>
             </tr>
 
             <tr>
                 <td style="padding: 20px">
-                    <table style="width: 100%; border: .5px solid #d4af37; background-color: #fff; padding: 10px">
+                    <table style="width: 100%; border: .5px solid #d4af37;background-color: #fffdd0; padding: 10px">
                         <tbody>
                             <tr>
-                                <th style="width: 20%" align="left">Qty</th>
-                                <th align="left">Item</th>
-                                <th style="width: 30%" align="right">Price</th>
+                                <th style="width: 20%; border-bottom: 1px solid #d4af37; height: 30px;" align="left">Qty</th>
+                                <th style="border-bottom: 1px solid #d4af37; height: 30px;" align="left">Item</th>
+                                <th style="width: 30%; border-bottom: 1px solid #d4af37; height: 30px;" align="right">Price</th>
                             </tr>
 
                             <tr style="height: 20px">
                                 <td style="height:30px; padding: 20px px; border-bottom: 1px solid #eee">1</td>
                                 <td style="height:30px; padding: 20px px; border-bottom: 1px solid #eee">Shenai</td>
-                                <td style="height:30px; padding: 20px px; border-bottom: 1px solid #eee" align="right">7,000</td>
+                                <td style="height:30px; padding: 20px px; border-bottom: 1px solid #eee" align="right">Ksh 7,000</td>
                             </tr>
 
                             <tr style="height: 20px">
                                 <td style="height:30px; padding: 20px px; border-bottom: 1px solid #eee">2</td>
                                 <td style="height:30px; padding: 20px px; border-bottom: 1px solid #eee">Flutes</td>
-                                <td style="height:30px; padding: 20px px; border-bottom: 1px solid #eee" align="right">10,000</td>
+                                <td style="height:30px; padding: 20px px; border-bottom: 1px solid #eee" align="right">Ksh 10,000</td>
                             </tr>
                             <tr style="height: 20px">
                                 <td style="height:30px; padding: 20px px; border-bottom: 1px solid #eee" colspan="2" align="right"><b>Delivery Fee</b></td>
-                                <td style="height:30px; padding: 20px px; border-bottom: 1px solid #eee" align="right">250</td>
+                                <td style="height:30px; padding: 20px px; border-bottom: 1px solid #eee" align="right">Ksh 250</td>
                             </tr>
                             <tr style="height: 20px">
                                 <td style="height:30px; padding: 20px px; " colspan="2" align="right"><b>Total</b></td>
-                                <td style="height:30px; padding: 20px px;"  align="right">17,250</td>
+                                <td style="height:30px; padding: 20px px;"  align="right">Ksh 17,250</td>
                             </tr>
                         </tbody>
                     </table>
+                </td>
+            </tr>
+            <tr>
+                <td style="padding: 20px">
+                    <p>
+                        Warmest Regards,<br>
+                        The Motion Talent Africa Team.
+                    </p> 
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <p style="font-size: 11px; text-align: center;">
+                        <i>
+                            Incase of any enquiries or complaints, do not hesitate to contact us on <a href="mailto:info@motiontalentafrica.co.ke" style="color: #d4af37"> info@motiontalentafrica.co.ke </a>| 0738 085 111
+                        </i>
+                    </p>
                 </td>
             </tr>
         </tbody>

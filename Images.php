@@ -48,8 +48,9 @@ Class Images {
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
     curl_setopt($ch, CURLOPT_POSTFIELDS, $post);
 
-    $response = curl_exec($ch)
-    return $response
+    $response = curl_exec($ch);
+    return $response;
+    
   }
 
   public function validate($data, $files){
