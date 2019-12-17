@@ -2,14 +2,14 @@
 
 class db{
 
-  public $db_name = 'mta_media';
+  public $db_name = 'motiontalent_media';
   public $host = 'localhost';
-  public $db_user = 'karuma';
-  public $db_pass = 'karuma';
+  public $db_user = 'motiontalent_karuma';
+  public $db_pass = 'K@z33@4546!';
   public $conn;
 
   public function __construct(){
-    $this->conn = new PDO('mysql:host='.$this->host.';dbname='.$this->db_name, $this->db_user, $this->db_pass);
+    // $this->conn = new PDO('mysql:host='.$this->host.';dbname='.$this->db_name, $this->db_user, $this->db_pass);
   }
 
   public function Create($req){

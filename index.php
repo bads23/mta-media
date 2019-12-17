@@ -1,5 +1,5 @@
 <?php
-error_reporting(-1);
+error_reporting(0);
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 ini_set('error_log', 'php-errors.log');
@@ -17,7 +17,7 @@ $products = new Products();
 $posts = new Posts();
 $email = new Sender();
 
-if($method === 'POST'){ 
+if($method === 'POST'){
   $data = json_decode(file_get_contents('php://input'));
   $files = $_FILES;
 
@@ -36,7 +36,7 @@ if($method === 'POST'){
       }
     }
   } else if(isset($data->email)) {
-    echo $email->make_admin_email($data->order);
+    echo $email->send_email($data->order);
 
   } else {
     echo print_r(file_get_contents("php://input"));
