@@ -23,7 +23,6 @@ Class Images {
       $upload = move_uploaded_file($msg,$path);
       
       if($upload){
-
         $response = $this->save_to_django($path, $data);
         return $response;
 
@@ -38,19 +37,48 @@ Class Images {
 
   public function save_to_django($path, $data){
 
-    $post = [
-      'catalog' => $data['catalogue_id'],
-      'path' => $path,
-      'is_avatar' => False
-    ];
+    if($data['category'] === 'products'){
 
-    $ch = curl_init('https://b23.pythonanywhere.com/images/');
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-    curl_setopt($ch, CURLOPT_POSTFIELDS, $post);
+      $post = [
+        'catalog' => $data['catalogue_id'],
+        'path' => $path,
+        'is_avatar' => False
+      ];
 
-    $response = curl_exec($ch);
-    return $response;
-    
+      $ch = curl_init('https://b23.pythonanywhere.com/images/');
+      // $ch = curl_init('http://localhost:8000/images/');
+      curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+      curl_setopt($ch, CURLOPT_POSTFIELDS, $post);
+
+      try{
+        $response = curl_exec($ch);
+        return true;
+      } catch(exception $e){
+        return false;
+      }
+
+
+    } else if($data['category'] === 'posts'){
+
+      $post = [
+        'posts' => $data['post_id'],
+        'Cover_Image' => $path
+      ];
+
+      $ch = curl_init('https://b23.pythonanywhere.com/images/'. $data['post_id'] .'/');
+      // $ch = curl_init('http://localhost:8000/posts/news/'. $data['post_id'] .'/');
+      curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'PATCH');
+      curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+      curl_setopt($ch, CURLOPT_POSTFIELDS, $post);
+
+      try{
+        $response = curl_exec($ch);
+        return true;
+      } catch(exception $e){
+        return false;
+      }
+    }
+
   }
 
   public function validate($data, $files){
@@ -61,15 +89,13 @@ Class Images {
     $is_image = getimagesize($files['image']['tmp_name']) ? true : false ;
 
     //sanitize data
-    $is_int = (gettype((int)$data['catalogue_id']) == 'integer') ? true : false ;
+    // $is_int = (gettype((int)$data['catalogue_id']) == 'integer') ? true : false ;
     
-    if($exists && $is_image && $is_int){
+    if($exists && $is_image){
       return true;
     } else if(!$exists){
       return false;
     } else if(!$is_image){
-      return false;
-    } else if(!$is_int){
       return false;
     }
 
@@ -79,8 +105,7 @@ Class Images {
     $salt = sha1(rand());
     $salt = substr($salt, 0, 25);
     $cat = str_split($data['category'], 1);
-    $id = (int)$data['catalogue_id'];
-    return $cat[0].$cat[1].$id.$salt;
+    return $cat[0].$cat[1].$salt;
   }
 
 }
