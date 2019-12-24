@@ -91,12 +91,7 @@ class Sender {
                                         <th style="width: 30%; border-bottom: 1px solid #d4af37; height: 30px;" align="right">Price</th>
                                     </tr>
 
-                                    '.
                                     
-                                        echo yes;
-                                
-                                    .'
-
                                     <tr style="height: 20px">
                                         <td style="height:30px; padding: 20px px; border-bottom: 1px solid #eee">1</td>
                                         <td style="height:30px; padding: 20px px; border-bottom: 1px solid #eee">Shenai</td>

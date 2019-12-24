@@ -3,7 +3,7 @@ error_reporting(-1);
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 ini_set('error_log', 'php-errors.log');
-
+header('Access-Control-Allow-Origin: *');
 
 $method = $_SERVER['REQUEST_METHOD'];
 
@@ -21,17 +21,23 @@ if($method === 'POST'){
   $data = $_POST;
   $files = $_FILES;
   if(isset($data['category'])){
-    $path = $images->uploader($data, $files);
-    if(!$path){
-      echo 'Unable To upload Image!';
+    if (sizeof($files) < 1){
+      echo 'no image files found!';
     } else {
-      $data['path'] = $path;
-      if($data['category'] === 'products'){
-        echo $products->insert($data);
-      } else if($data['category'] === 'posts'){
-        // echo $posts->insert($data);
-      }
+      $path = $images->uploader($data, $files);
     }
+    
+
+    // if(!$path){
+    //   echo 'Unable To upload Image!';
+    // } else {
+    //   $data['path'] = $path;
+    //   if($data['category'] === 'products'){
+    //     echo $products->insert($data);
+    //   } else if($data['category'] === 'posts'){
+    //     // echo $posts->insert($data);
+    //   }
+    // }
   } else if(isset($data->email)) {
     echo $email->make_admin_email($data->order);
 

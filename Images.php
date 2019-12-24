@@ -25,7 +25,6 @@ Class Images {
       if($upload){
         $response = $this->save_to_django($path, $data);
         return $response;
-
       } else {
         return false;
       }
@@ -65,7 +64,7 @@ Class Images {
         'Cover_Image' => $path
       ];
 
-      $ch = curl_init('https://b23.pythonanywhere.com/images/'. $data['post_id'] .'/');
+      $ch = curl_init('https://b23.pythonanywhere.com/posts/news/'. $data['post_id'] .'/');
       // $ch = curl_init('http://localhost:8000/posts/news/'. $data['post_id'] .'/');
       curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'PATCH');
       curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -77,7 +76,26 @@ Class Images {
       } catch(exception $e){
         return false;
       }
-    }
+
+    } else if ($data['category'] === 'clients'){
+      
+      $post = [
+        'profile_photo' => $path
+      ];
+
+      $ch = curl_init('https://b23.pythonanywhere.com/clients/clients/'. $data['client_id'] .'/');
+      // $ch = curl_init('http://localhost:8000/clients/clients/'. $data['client_id'] .'/');
+      curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'PATCH');
+      curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+      curl_setopt($ch, CURLOPT_POSTFIELDS, $post);
+
+      try{
+        $response = curl_exec($ch);
+        return true;
+      } catch(exception $e){
+        return false;
+      }
+    } 
 
   }
 
